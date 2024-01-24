@@ -80,3 +80,12 @@ expect(mockRes.status).toHaveBeenCalledWith(200);
 expect(mockRes.json).toHaveBeenCalledWith(mockLibroEliminado);
 });
 });
+const mongoose = require('mongoose');
+// Importa tu controlador y otros módulos necesarios
+
+// ... tus pruebas aquí ...
+
+afterAll(async () => {
+  // Cierra la conexión a la base de datos al finalizar todas las pruebas
+  await mongoose.disconnect();
+});
