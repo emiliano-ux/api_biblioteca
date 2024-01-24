@@ -3,6 +3,28 @@ const express = require("express");
 const { auth } = require("express-oauth2-jwt-bearer");
 const errorHandler = require("./middlewares/errorHandler");
 
+// Configuración de la conexión a MongoDB
+const mongoose = require('mongoose');
+
+const { OAUTH_AUDIENCE, OAUTH_URL, PORT, MONGO_DB } = process.env;
+
+mongoose.connect(MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Conexión a MongoDB establecida con éxito');
+  })
+  .catch((error) => {
+    console.error('Error al conectar a MongoDB:', error.message);
+  });
+
+// Configuración de la autenticación OAuth
+// ... Tu configuración de OAuth aquí
+
+// Configuración del puerto
+const port = PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Servidor en ejecución en el puerto ${port}`);
+});
 
 require('dotenv').config();
 
@@ -30,3 +52,5 @@ app.listen(3000, () => {
 });
 
 module.exports = app;
+
+
